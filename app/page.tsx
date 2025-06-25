@@ -87,7 +87,7 @@ export default function BayatPresentation() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50 relative overflow-hidden font-alexandria">
+    <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-orange-50 to-yellow-50 relative py-20 font-alexandria">
       {/* Navigation */}
       <div className="fixed top-4 right-4 z-50 flex gap-2">
         <Button
@@ -95,6 +95,9 @@ export default function BayatPresentation() {
           size="sm"
           onClick={() => window.open('/landing', '_blank')}
           className="bg-white/90 backdrop-blur-sm"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+          }}
         >
           {isArabic ? 'الموقع' : 'Website'}
         </Button>
@@ -103,14 +106,19 @@ export default function BayatPresentation() {
           size="sm"
           onClick={() => setIsArabic(!isArabic)}
           className="bg-white/90 backdrop-blur-sm"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+          }}
         >
           {isArabic ? 'EN' : 'عربي'}
         </Button>
       </div>
 
       {/* Slide Content */}
-      <div className="h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-6xl mx-auto">{renderSlide()}</div>
+      <div className="min-h-screen flex items-center justify-center p-4 ">
+        <div className="w-full h-full min-h-screen max-w-6xl mx-auto">
+          {renderSlide()}
+        </div>
       </div>
 
       {/* Navigation Controls */}
@@ -121,6 +129,9 @@ export default function BayatPresentation() {
           onClick={prevSlide}
           disabled={currentSlide === 0}
           className="bg-white/90 backdrop-blur-sm hover:bg-white"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+          }}
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
@@ -145,6 +156,9 @@ export default function BayatPresentation() {
           onClick={nextSlide}
           disabled={currentSlide === slides.length - 1}
           className="bg-white/90 backdrop-blur-sm hover:bg-white"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+          }}
         >
           <ChevronRight className="h-4 w-4" />
         </Button>
@@ -162,9 +176,9 @@ export default function BayatPresentation() {
 
 function IntroSlide({ isArabic }: { isArabic: boolean }) {
   return (
-    <div className="text-center space-y-12 animate-fade-in relative overflow-hidden">
+    <div className="text-center space-y-12 animate-fade-in relative ">
       {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0  pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 bg-[#FDC64B]/20 rounded-full animate-float"></div>
         <div className="absolute bottom-20 right-10 w-24 h-24 bg-[#B9442A]/20 rounded-full animate-float-delayed"></div>
         <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-[#FDDA7D]/30 rounded-full animate-pulse"></div>
@@ -175,31 +189,27 @@ function IntroSlide({ isArabic }: { isArabic: boolean }) {
         <div className="space-y-6">
           <div className="flex justify-center mb-8">
             <div className="relative">
-              <div className="bg-gradient-to-br from-[#B9442A] to-[#AD5743] p-8 rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
-                <div className="relative">
-                  <Plane className="w-20 h-20 text-white transform -rotate-12" />
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#FDC64B] rounded-full animate-ping"></div>
-                </div>
-              </div>
-              <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2 rounded-full shadow-lg">
-                <span className="text-2xl font-bold text-[#B9442A] arabic-text">
-                  بايات
-                </span>
-              </div>
+              <Image
+                src="/images/bayat-logo-black.png"
+                alt="Bayat Logo"
+                className="w-64 h-full md:w-full md:h-64"
+                width={400}
+                height={400}
+              />
             </div>
           </div>
 
-          <h1 className="text-7xl font-bold text-gray-800 mb-6 animate-slide-up">
+          <h1 className="md:text-7xl text-5xl font-bold text-gray-800 mb-6 animate-slide-up">
             {isArabic ? 'بايات' : 'Bayat'}
           </h1>
 
           <div className="space-y-4">
-            <p className="text-3xl text-gray-600 max-w-4xl mx-auto leading-relaxed animate-slide-up-delayed">
+            <p className="md:text-3xl text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed animate-slide-up-delayed">
               {isArabic
                 ? 'ربط المدن من خلال التوصيل بواسطة المسافرين'
                 : 'Connecting cities through traveler-powered delivery'}
             </p>
-            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+            <p className="md:text-lg text-sm text-gray-500 max-w-2xl mx-auto">
               {isArabic
                 ? 'شبكة ذكية تجمع بين المسافرين والمحتاجين لتوصيل سريع وآمن'
                 : 'Smart network connecting travelers and customers for fast, secure delivery'}
@@ -208,10 +218,10 @@ function IntroSlide({ isArabic }: { isArabic: boolean }) {
         </div>
 
         {/* Interactive Elements */}
-        <div className="grid md:grid-cols-3 gap-8 mt-16">
-          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+        <div className="grid md:grid-cols-3 gap-8 my-10">
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border-2  hover:border-2 border-orange-100 transition-all duration-300 hover:-translate-y-2">
             <div className="text-[#B9442A] mb-4 flex justify-center">
-              <Users className="w-12 h-12" />
+              <Users className="w-12 h-12 " />
             </div>
             <h3 className="font-bold text-gray-800 mb-2">
               {isArabic ? 'مجتمع المسافرين' : 'Traveler Community'}
@@ -223,7 +233,7 @@ function IntroSlide({ isArabic }: { isArabic: boolean }) {
             </p>
           </div>
 
-          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 delay-100">
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border-2  hover:border-2 border-orange-100 transition-all duration-300 hover:-translate-y-2 delay-100">
             <div className="text-[#FDC64B] mb-4 flex justify-center">
               <Package className="w-12 h-12" />
             </div>
@@ -237,7 +247,7 @@ function IntroSlide({ isArabic }: { isArabic: boolean }) {
             </p>
           </div>
 
-          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 delay-200">
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border-2  hover:border-2 border-orange-100 transition-all duration-300 hover:-translate-y-2 delay-200">
             <div className="text-[#AD5743] mb-4 flex justify-center">
               <Globe className="w-12 h-12" />
             </div>
@@ -286,10 +296,10 @@ function ProblemSlide({ isArabic }: { isArabic: boolean }) {
   return (
     <div className="space-y-12 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-5xl font-bold text-gray-800 mb-6">
+        <h2 className="md:text-5xl text-3xl font-bold text-gray-800 mb-6">
           {isArabic ? 'المشكلة' : 'The Problem'}
         </h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <p className="md:text-xl text-sm text-gray-600 max-w-3xl mx-auto">
           {isArabic
             ? 'التحديات التي يواجهها الناس في الحصول على المنتجات بين المدن الليبية'
             : 'Challenges people face getting products between Libyan cities'}
@@ -300,7 +310,7 @@ function ProblemSlide({ isArabic }: { isArabic: boolean }) {
         {problems.map((problem, index) => (
           <div
             key={index}
-            className="bg-white p-8 rounded-2xl shadow-lg text-center space-y-4 hover:shadow-xl transition-shadow"
+            className="bg-white p-8 rounded-2xl border-2  text-center space-y-4 hover:border-2 border-orange-100 transition-shadow"
           >
             <div className="text-[#B9442A] flex justify-center">
               {problem.icon}
@@ -341,37 +351,65 @@ function SolutionSlide({ isArabic }: { isArabic: boolean }) {
   return (
     <div className="space-y-12 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-5xl font-bold text-gray-800 mb-6">
+        <h2
+          className="md:text-5xl text-3xl font-bold text-gray-800 mb-6"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+          }}
+        >
           {isArabic ? 'الحل' : 'The Solution'}
         </h2>
-        <p className="text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+        <p className="md:text-2xl text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
           {isArabic
             ? 'بايات يربط بين المدن الليبية الرئيسية من خلال شبكة من المسافرين الجويين الذين يمكنهم توصيل الأغراض الشخصية'
             : 'Bayat connects major Libyan cities through a network of air travelers who can deliver personal items'}
         </p>
       </div>
 
-      <div className="bg-white p-12 rounded-3xl shadow-xl">
+      <div className="bg-white p-12 rounded-3xl border-2 border-orange-100">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
-            <h3 className="text-3xl font-bold text-[#B9442A]">
+            <h3
+              className="md:text-4xl text-2xl font-bold text-[#B9442A] leading-loose"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+                lineHeight: isArabic ? '1.5' : '1.2',
+              }}
+            >
               {isArabic
                 ? 'نموذج التوصيل بواسطة المسافرين'
                 : 'Traveler-Powered Delivery Model'}
             </h3>
-            <div className="space-y-4">
+            <div
+              className="space-y-4"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+              }}
+            >
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <div className="text-green-600">{benefit.icon}</div>
-                  <span className="text-lg text-gray-700">{benefit.text}</span>
+                  <div className="text-green-600 md:w-12 md:h-12 w-8 h-8">
+                    {benefit.icon}
+                  </div>
+                  <span
+                    className="md:text-xl text-lg text-gray-700"
+                    style={{
+                      direction: isArabic ? 'rtl' : 'ltr',
+                    }}
+                  >
+                    {benefit.text}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
           <div className="flex justify-center">
-            <div className="bg-gradient-to-br from-[#FDC64B] to-[#FDDA7D] p-12 rounded-full">
-              <Plane className="w-32 h-32 text-[#B9442A]" />
-            </div>
+            <Image
+              src="/images/bayat-logo-black.png"
+              alt="Bayat Logo"
+              width={400}
+              height={400}
+            />
           </div>
         </div>
       </div>
@@ -410,7 +448,7 @@ function HowItWorksSlide({ isArabic }: { isArabic: boolean }) {
   return (
     <div className="space-y-12 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-5xl font-bold text-gray-800 mb-6">
+        <h2 className="md:text-5xl text-3xl font-bold text-gray-800 mb-6">
           {isArabic ? 'كيف يعمل' : 'How It Works'}
         </h2>
         <p className="text-xl text-gray-600">
@@ -429,7 +467,7 @@ function HowItWorksSlide({ isArabic }: { isArabic: boolean }) {
                 <ArrowRight className="absolute top-8 -right-12 w-8 h-8 text-gray-400 hidden md:block" />
               )}
             </div>
-            <div className="bg-white p-6 rounded-2xl shadow-lg space-y-4">
+            <div className="bg-white p-6 rounded-2xl border-2 border-orange-100 space-y-4">
               <div className="text-[#FDC64B] flex justify-center">
                 {step.icon}
               </div>
@@ -449,27 +487,50 @@ function UserStorySlide({ isArabic }: { isArabic: boolean }) {
   return (
     <div className="space-y-12 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-5xl font-bold text-gray-800 mb-6">
+        <h2
+          className="md:text-5xl text-3xl font-bold text-gray-800 mb-6"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic ? 'قصة المستخدم: محمود' : 'User Story: Mahmoud'}
         </h2>
       </div>
 
-      <div className="bg-white p-12 rounded-3xl shadow-xl">
+      <div className="bg-white p-12 rounded-3xl border-2 border-orange-100">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
-              <h3 className="text-2xl font-bold text-[#B9442A]">
+              <h3
+                className="md:text-2xl text-xl font-bold text-[#B9442A] leading-loose"
+                style={{
+                  direction: isArabic ? 'rtl' : 'ltr',
+                  lineHeight: isArabic ? '1.5' : '1.2',
+                }}
+              >
                 {isArabic ? 'طالب من بنغازي' : 'Student from Benghazi'}
               </h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p
+                className="md:text-lg text-sm text-gray-700 leading-relaxed"
+                style={{
+                  direction: isArabic ? 'rtl' : 'ltr',
+                  lineHeight: isArabic ? '1.5' : '1.2',
+                }}
+              >
                 {isArabic
-                  ? 'محمود طالب جامعي في بنغازي يحتاج إلى لابتوب عالي الأداء للبرمجة، لكن الخيارات المتاحة محلياً محدودة ومكلفة.'
-                  : 'Mahmoud is a university student in Benghazi who needs a high-performance laptop for programming, but local options are limited and expensive.'}
+                  ? 'محمود طالب جامعي في بنغازي يحتاج إلى لابتوب عالي الأداء للبرمجة، لكن الخيارات المتاحة محلياً محدودة ومكلفة'
+                  : 'Mahmoud is a university student in Benghazi who needs a high-performance laptop for programming, but local options are limited and expensive'}
               </p>
             </div>
 
             <div className="space-y-6">
-              <div className="flex items-start gap-4">
+              <div
+                className="flex items-start gap-4"
+                style={{
+                  direction: isArabic ? 'rtl' : 'ltr',
+                }}
+              >
                 <div className="bg-[#FDC64B] p-2 rounded-full">
                   <Smartphone className="w-6 h-6 text-[#B9442A]" />
                 </div>
@@ -485,7 +546,12 @@ function UserStorySlide({ isArabic }: { isArabic: boolean }) {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              <div
+                className="flex items-start gap-4"
+                style={{
+                  direction: isArabic ? 'rtl' : 'ltr',
+                }}
+              >
                 <div className="bg-[#FDC64B] p-2 rounded-full">
                   <Users className="w-6 h-6 text-[#B9442A]" />
                 </div>
@@ -501,7 +567,12 @@ function UserStorySlide({ isArabic }: { isArabic: boolean }) {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              <div
+                className="flex items-start gap-4"
+                style={{
+                  direction: isArabic ? 'rtl' : 'ltr',
+                }}
+              >
                 <div className="bg-[#FDC64B] p-2 rounded-full">
                   <CheckCircle className="w-6 h-6 text-[#B9442A]" />
                 </div>
@@ -522,10 +593,22 @@ function UserStorySlide({ isArabic }: { isArabic: boolean }) {
           <div className="flex justify-center">
             <div className="bg-gradient-to-br from-[#B9442A] to-[#AD5743] p-8 rounded-2xl text-white text-center space-y-4">
               <div className="text-6xl">💻</div>
-              <h4 className="text-xl font-bold">
+              <h4
+                className="md:text-xl text-lg font-bold"
+                style={{
+                  direction: isArabic ? 'rtl' : 'ltr',
+                  lineHeight: isArabic ? '1.5' : '1.2',
+                }}
+              >
                 {isArabic ? 'نجح محمود!' : 'Mahmoud succeeded!'}
               </h4>
-              <p className="text-sm opacity-90">
+              <p
+                className="md:text-sm text-xs opacity-90"
+                style={{
+                  direction: isArabic ? 'rtl' : 'ltr',
+                  lineHeight: isArabic ? '1.5' : '1.2',
+                }}
+              >
                 {isArabic ? 'وفر 40% من التكلفة' : 'Saved 40% on cost'}
               </p>
               <div className="flex justify-center">
@@ -548,10 +631,22 @@ function AppInterfaceSlide1({ isArabic }: { isArabic: boolean }) {
   return (
     <div className="space-y-12 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-5xl font-bold text-gray-800 mb-6">
+        <h2
+          className="md:text-5xl text-3xl font-bold text-gray-800 mb-6"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic ? 'واجهة التطبيق - الرئيسية' : 'App Interface - Home'}
         </h2>
-        <p className="text-xl text-gray-600">
+        <p
+          className="md:text-xl text-sm text-gray-600"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic
             ? 'تصفح الطلبات المتاحة بين المدن'
             : 'Browse available requests between cities'}
@@ -565,13 +660,32 @@ function AppInterfaceSlide1({ isArabic }: { isArabic: boolean }) {
             alt="Bayat Home Interface"
             width={400}
             height={800}
-            className="rounded-3xl shadow-2xl"
+            className="rounded-3xl border-2 border-orange-100"
           />
-          <div className="absolute -right-8 top-1/4 bg-white p-4 rounded-lg shadow-lg max-w-xs">
-            <h4 className="font-semibold text-[#B9442A] mb-2">
+          <div
+            className="absolute  top-1/4 bg-white p-4 rounded-lg border-2 border-orange-100 max-w-xs"
+            style={{
+              right: isArabic ? '0' : 'auto',
+              left: isArabic ? 'auto' : '0',
+              lineHeight: isArabic ? '1.5' : '1.2',
+            }}
+          >
+            <h4
+              className="font-semibold text-[#B9442A] mb-2"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+                lineHeight: isArabic ? '1.5' : '1.2',
+              }}
+            >
               {isArabic ? 'الميزات الرئيسية:' : 'Key Features:'}
             </h4>
-            <ul className="text-sm space-y-1 text-gray-600">
+            <ul
+              className="text-sm space-y-1 text-gray-600"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+                lineHeight: isArabic ? '1.5' : '1.2',
+              }}
+            >
               <li>• {isArabic ? 'تبويب المدن' : 'City tabs'}</li>
               <li>• {isArabic ? 'عرض الطلبات' : 'Request listings'}</li>
               <li>• {isArabic ? 'تقييم المسافرين' : 'Traveler ratings'}</li>
@@ -588,12 +702,24 @@ function AppInterfaceSlide2({ isArabic }: { isArabic: boolean }) {
   return (
     <div className="space-y-12 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-5xl font-bold text-gray-800 mb-6">
+        <h2
+          className="md:text-5xl text-3xl font-bold text-gray-800 mb-6"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic
             ? 'واجهة التطبيق - تفاصيل الطلب'
             : 'App Interface - Order Details'}
         </h2>
-        <p className="text-xl text-gray-600">
+        <p
+          className="md:text-xl text-sm text-gray-600"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic
             ? 'عرض تفصيلي للطلبات مع معلومات المسافر'
             : 'Detailed view with traveler information'}
@@ -607,13 +733,32 @@ function AppInterfaceSlide2({ isArabic }: { isArabic: boolean }) {
             alt="Bayat Order Details Interface"
             width={400}
             height={800}
-            className="rounded-3xl shadow-2xl"
+            className="rounded-3xl border-2 border-orange-100"
           />
-          <div className="absolute -left-8 top-1/3 bg-white p-4 rounded-lg shadow-lg max-w-xs">
-            <h4 className="font-semibold text-[#B9442A] mb-2">
+          <div
+            className="absolute  top-1/3 bg-white p-4 rounded-lg border-2 border-orange-100 max-w-xs"
+            style={{
+              right: isArabic ? '0' : 'auto',
+              left: isArabic ? 'auto' : '0',
+              lineHeight: isArabic ? '1.5' : '1.2',
+            }}
+          >
+            <h4
+              className="font-semibold text-[#B9442A] mb-2"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+                lineHeight: isArabic ? '1.5' : '1.2',
+              }}
+            >
               {isArabic ? 'تفاصيل شاملة:' : 'Comprehensive Details:'}
             </h4>
-            <ul className="text-sm space-y-1 text-gray-600">
+            <ul
+              className="text-sm space-y-1 text-gray-600"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+                lineHeight: isArabic ? '1.5' : '1.2',
+              }}
+            >
               <li>• {isArabic ? 'صور المنتج' : 'Product images'}</li>
               <li>• {isArabic ? 'وصف مفصل' : 'Detailed description'}</li>
               <li>• {isArabic ? 'معلومات المسافر' : 'Traveler info'}</li>
@@ -630,12 +775,24 @@ function AppInterfaceSlide3({ isArabic }: { isArabic: boolean }) {
   return (
     <div className="space-y-12 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-5xl font-bold text-gray-800 mb-6">
+        <h2
+          className="md:text-5xl text-3xl font-bold text-gray-800 mb-6"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic
             ? 'واجهة التطبيق - تسجيل الدخول'
             : 'App Interface - Authentication'}
         </h2>
-        <p className="text-xl text-gray-600">
+        <p
+          className="md:text-xl text-sm text-gray-600"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic
             ? 'تسجيل دخول آمن وسهل الاستخدام'
             : 'Secure and user-friendly authentication'}
@@ -649,13 +806,32 @@ function AppInterfaceSlide3({ isArabic }: { isArabic: boolean }) {
             alt="Bayat Authentication Interface"
             width={400}
             height={800}
-            className="rounded-3xl shadow-2xl"
+            className="rounded-3xl border-2 border-orange-100"
           />
-          <div className="absolute -right-8 top-1/2 bg-white p-4 rounded-lg shadow-lg max-w-xs">
-            <h4 className="font-semibold text-[#B9442A] mb-2">
+          <div
+            className="absolute  top-1/2 bg-white p-4 rounded-lg border-2 border-orange-100 max-w-xs"
+            style={{
+              right: isArabic ? '0' : 'auto',
+              left: isArabic ? 'auto' : '0',
+              lineHeight: isArabic ? '1.5' : '1.2',
+            }}
+          >
+            <h4
+              className="font-semibold text-[#B9442A] mb-2"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+                lineHeight: isArabic ? '1.5' : '1.2',
+              }}
+            >
               {isArabic ? 'تجربة مستخدم متميزة:' : 'Excellent UX:'}
             </h4>
-            <ul className="text-sm space-y-1 text-gray-600">
+            <ul
+              className="text-sm space-y-1 text-gray-600"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+                lineHeight: isArabic ? '1.5' : '1.2',
+              }}
+            >
               <li>
                 • {isArabic ? 'واجهة عربية كاملة' : 'Full Arabic interface'}
               </li>
@@ -674,28 +850,40 @@ function LandingPreviewSlide({ isArabic }: { isArabic: boolean }) {
   return (
     <div className="space-y-12 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-5xl font-bold text-gray-800 mb-6">
+        <h2
+          className="md:text-5xl text-3xl font-bold text-gray-800 mb-6"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic ? 'معاينة الصفحة الرئيسية' : 'Landing Page Preview'}
         </h2>
-        <p className="text-xl text-gray-600">
+        <p
+          className="md:text-xl text-sm text-gray-600"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic
             ? 'تصميم حديث يعكس رؤية بايات'
             : "Modern design reflecting Bayat's vision"}
         </p>
       </div>
 
-      <div className="bg-white p-8 rounded-3xl shadow-xl">
+      <div className="bg-white p-8 rounded-3xl border-2 border-orange-100">
         <Image
           src="/images/landing-page.png"
           alt="Bayat Landing Page"
           width={1200}
           height={800}
-          className="rounded-2xl shadow-lg w-full"
+          className="rounded-2xl border-2 border-orange-100 w-full"
         />
       </div>
 
       <div className="grid md:grid-cols-3 gap-6 text-center">
-        <div className="bg-white p-6 rounded-2xl shadow-lg">
+        <div className="bg-white p-6 rounded-2xl border-2 border-orange-100">
           <Globe className="w-12 h-12 text-[#B9442A] mx-auto mb-4" />
           <h3 className="font-semibold text-gray-800 mb-2">
             {isArabic ? 'تصميم متجاوب' : 'Responsive Design'}
@@ -704,7 +892,7 @@ function LandingPreviewSlide({ isArabic }: { isArabic: boolean }) {
             {isArabic ? 'يعمل على جميع الأجهزة' : 'Works on all devices'}
           </p>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-lg">
+        <div className="bg-white p-6 rounded-2xl border-2 border-orange-100">
           <Users className="w-12 h-12 text-[#FDC64B] mx-auto mb-4" />
           <h3 className="font-semibold text-gray-800 mb-2">
             {isArabic ? 'محتوى شامل' : 'Comprehensive Content'}
@@ -713,7 +901,7 @@ function LandingPreviewSlide({ isArabic }: { isArabic: boolean }) {
             {isArabic ? 'شرح مفصل للخدمة' : 'Detailed service explanation'}
           </p>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-lg">
+        <div className="bg-white p-6 rounded-2xl border-2 border-orange-100">
           <Smartphone className="w-12 h-12 text-[#AD5743] mx-auto mb-4" />
           <h3 className="font-semibold text-gray-800 mb-2">
             {isArabic ? 'دعوة للعمل' : 'Call to Action'}
@@ -757,10 +945,22 @@ function VisionSlide({ isArabic }: { isArabic: boolean }) {
   return (
     <div className="space-y-12 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-5xl font-bold text-gray-800 mb-6">
+        <h2
+          className="md:text-5xl text-3xl font-bold text-gray-800 mb-6"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic ? 'الرؤية والأثر' : 'Vision & Impact'}
         </h2>
-        <p className="text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+        <p
+          className="md:text-2xl text-sm text-gray-600 max-w-4xl mx-auto leading-relaxed"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic
             ? 'بناء مستقبل أفضل للتجارة والتوصيل في ليبيا'
             : 'Building a better future for commerce and delivery in Libya'}
@@ -771,13 +971,27 @@ function VisionSlide({ isArabic }: { isArabic: boolean }) {
         {visionPoints.map((point, index) => (
           <div
             key={index}
-            className="bg-white p-8 rounded-3xl shadow-xl text-center space-y-6 hover:shadow-2xl transition-shadow"
+            className="bg-white p-8 rounded-3xl border-2 text-center space-y-6 hover:border-2 border-orange-100 transition-shadow"
           >
             <div className="text-[#B9442A] flex justify-center">
               {point.icon}
             </div>
-            <h3 className="text-2xl font-bold text-gray-800">{point.title}</h3>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <h3
+              className="md:text-2xl text-xl font-bold text-gray-800"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+                lineHeight: isArabic ? '1.5' : '1.2',
+              }}
+            >
+              {point.title}
+            </h3>
+            <p
+              className="text-gray-600 md:text-lg text-sm leading-relaxed"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+                lineHeight: isArabic ? '1.5' : '1.2',
+              }}
+            >
               {point.desc}
             </p>
           </div>
@@ -785,25 +999,49 @@ function VisionSlide({ isArabic }: { isArabic: boolean }) {
       </div>
 
       <div className="bg-gradient-to-r from-[#B9442A] to-[#AD5743] p-12 rounded-3xl text-white text-center">
-        <h3 className="text-3xl font-bold mb-4">
+        <h3
+          className="md:text-3xl text-xl font-bold mb-4"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic ? 'الأثر المتوقع' : 'Expected Impact'}
         </h3>
         <div className="grid md:grid-cols-3 gap-8 mt-8">
           <div>
-            <div className="text-4xl font-bold text-[#FDC64B]">10,000+</div>
-            <p className="text-lg opacity-90">
+            <div className="text-4xl font-bold text-[#FDC64B]">5,000+</div>
+            <p
+              className="md:text-lg text-sm opacity-90"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+                lineHeight: isArabic ? '1.5' : '1.2',
+              }}
+            >
               {isArabic ? 'مستخدم في السنة الأولى' : 'Users in first year'}
             </p>
           </div>
           <div>
-            <div className="text-4xl font-bold text-[#FDC64B]">5</div>
-            <p className="text-lg opacity-90">
+            <div className="text-4xl font-bold text-[#FDC64B]">3</div>
+            <p
+              className="md:text-lg text-sm opacity-90"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+                lineHeight: isArabic ? '1.5' : '1.2',
+              }}
+            >
               {isArabic ? 'مدن رئيسية' : 'Major cities'}
             </p>
           </div>
           <div>
-            <div className="text-4xl font-bold text-[#FDC64B]">50%</div>
-            <p className="text-lg opacity-90">
+            <div className="text-4xl font-bold text-[#FDC64B]">25%</div>
+            <p
+              className="md:text-lg text-sm opacity-90"
+              style={{
+                direction: isArabic ? 'rtl' : 'ltr',
+                lineHeight: isArabic ? '1.5' : '1.2',
+              }}
+            >
               {isArabic ? 'توفير في التكلفة' : 'Cost savings'}
             </p>
           </div>
@@ -817,52 +1055,87 @@ function CTASlide({ isArabic }: { isArabic: boolean }) {
   return (
     <div className="text-center space-y-12 animate-fade-in">
       <div className="space-y-6">
-        <h2 className="text-6xl font-bold text-gray-800">
+        <h2
+          className="md:text-5xl text-3xl font-bold text-gray-800"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic ? 'انضم إلى شبكة بايات' : 'Join the Bayat Network'}
         </h2>
-        <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        <p
+          className="md:text-2xl text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed"
+          style={{
+            direction: isArabic ? 'rtl' : 'ltr',
+            lineHeight: isArabic ? '1.5' : '1.2',
+          }}
+        >
           {isArabic
             ? 'كن جزءاً من ثورة التوصيل في ليبيا'
             : "Be part of Libya's delivery revolution"}
         </p>
       </div>
 
-      <div className="bg-white p-12 rounded-3xl shadow-xl max-w-4xl mx-auto">
+      <div className="bg-white p-12 rounded-3xl border-2 border-orange-100 max-w-4xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
-              <h3 className="text-3xl font-bold text-[#B9442A]">
-                {isArabic ? 'التطبيق قريباً' : 'App Coming Soon'}
+              <h3
+                className="md:text-5xl text-3xl font-bold text-[#B9442A]"
+                style={{
+                  direction: isArabic ? 'rtl' : 'ltr',
+                  lineHeight: isArabic ? '1.5' : '1.2',
+                }}
+              >
+                {isArabic ? 'التطبيق قريبًا' : 'App Coming Soon'}
               </h3>
-              <p className="text-lg text-gray-700">
+              <p
+                className="md:text-xl text-lg text-gray-700"
+                style={{
+                  direction: isArabic ? 'rtl' : 'ltr',
+                  lineHeight: isArabic ? '1.5' : '1.2',
+                }}
+              >
                 {isArabic
-                  ? 'متوفر قريباً على iOS و Android'
+                  ? 'متوفر قريبًا على iOS و Android'
                   : 'Available soon on iOS & Android'}
               </p>
             </div>
 
             <div className="flex gap-4 justify-center md:justify-start">
               <div className="bg-black text-white px-6 py-3 rounded-lg flex items-center gap-2">
-                <Smartphone className="w-6 h-6" />
+                <Smartphone className="w-6 h-6 md:w-8 md:h-8" />
                 <span>App Store</span>
               </div>
               <div className="bg-black text-white px-6 py-3 rounded-lg flex items-center gap-2">
-                <Smartphone className="w-6 h-6" />
+                <Smartphone className="w-6 h-6 md:w-8 md:h-8  " />
                 <span>Google Play</span>
               </div>
             </div>
           </div>
 
           <div className="flex justify-center">
-            <div className="bg-gradient-to-br from-[#FDC64B] to-[#FDDA7D] p-16 rounded-full">
-              <Plane className="w-32 h-32 text-[#B9442A]" />
-            </div>
+            <Image
+              src="/images/bayat-logo-black.png"
+              alt="Bayat Logo"
+              width={200}
+              height={200}
+            />
           </div>
         </div>
       </div>
 
-      <div className="text-lg text-gray-600">
+      <div className="md:text-5xl text-3xl text-gray-600">
         {isArabic ? 'شكراً لكم' : 'Thank you'}
+      </div>
+      <div className="flex justify-center rounded-lg">
+        <button
+          className="bg-[#B9442A] text-white px-6 py-3  flex items-center gap-2 hover:bg-[#AD5743] transition-colors  "
+          onClick={() => window.open('/landing', '_blank')}
+        >
+          {isArabic ? 'الصفحة الرئيسية' : 'Landing Page'}
+        </button>
       </div>
     </div>
   );

@@ -37,11 +37,14 @@ export default function BayatLandingPage() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-br from-[#B9442A] to-[#AD5743] p-2 rounded-xl">
-                <Plane className="w-6 h-6 text-white transform -rotate-12" />
-              </div>
+              <Image
+                src="/images/bayat-logo-black.png"
+                alt="Bayat Logo"
+                width={100}
+                height={100}
+              />
               <span className="text-2xl font-bold text-[#B9442A] arabic-text">
-                بايات
+                {isArabic ? 'بايات' : 'Bayat'}
               </span>
             </div>
 
